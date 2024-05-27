@@ -1,0 +1,28 @@
+.logo {
+    justify-content: center;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px lightgray;
+}
+
+.rps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    max-width: 50%;
+    width: 300px;
+    height: auto;
+   
+
+    border: 7px solid #810505;
+    border-radius: 170px;
+    border-style: outset;
+    margin: 80px;
+}
