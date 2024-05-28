@@ -4,18 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <header class="header-container">
         <img class="logo" src="./images/rpslogo.jpg" alt="Rock Paper Scissors">
-    </header>   
-    <div class="choice">
-        <img class="rps" src="./images/rock.jpg" alt="Rock">
-        <img class="rps" src="./images/paper.jpg" alt="Paper">
-        <img class="rps" src="./images/scissors.jpg" alt="Scissors">
+    </header>  
+    <div class="choices">
+        <img src="./images/rocklarge.jpg" alt="Rock" id="rock" >
+        <img src="./images/paperlarge.jpg" alt="Paper" id="paper">
+        <img src="./images/scissorslarge.jpg" alt="Scissors" id="scissors">
     </div>
+    <div class="choice-display">  
+            <h2>Human Choice</h2>
+            <img id="human-choice-image" src="" alt="Human Choice" style="display: none;">
+            <h2>Computer Choice</h2>
+            <img id="computer-choice-image" src="" alt="Human Choice" style="display: none;">
+        </div>
+    <div class="scoreboard">
+        <p>Human Wins: <span id="human-score">0</span></p>
+        <p>Computer Wins: <span id="computer-score">0</span></p>
+        <p> Ties: <span id="ties">0</span></p>
+    </div>
+    <div id="message"></div>
+    <script src="script.js"></script>
 </body>
 </html>
 

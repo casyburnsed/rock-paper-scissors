@@ -1,6 +1,7 @@
 // GLOBAL WIN COUNTER
 let humanWins = 0;
 let computerWins = 0;
+let ties = 0;
 
 // COMPUTER THROW
 function getComputerChoice() {
@@ -15,19 +16,20 @@ function getComputerChoice() {
     }
 }
 
+// HUMAN CHOICE EVENTS TO DOM
+document.addEventListener('DOMContentLoaded', () =>{
+    document.getElementById('rock').addEventListener('click', () => getHumanChoice('rock'));
+    document.getElementById('paper').addEventListener('click', () => getHumanChoice('paper'));
+    document.getElementById('scissors').addEventListener('click', () => getHumanChoice('scissors'));
+});
+
 // HUMAN THROW
-function getHumanChoice() {
-    let userInput = '';
-        while (true) {
-            userInput = prompt ('Please enter rock, paper, or scissors:');
-            userInput = userInput.toLowerCase();
-            if (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors') {
-                break;
-            } else {
-                alert('Invalid choice. Please enter rock, paper, or scissors.');
-            }
-        }
-        return userInput;
+function getHumanChoice(userInput) {
+    if (humanWins >= 5 || computerWins >= 5) {
+        return;
+    }
+    console.log('User choice:', userInput);
+    playRound(userInput);
 }
 
 // SCORING SYSTEM
@@ -46,27 +48,54 @@ function checkWinner(getHumanChoice, getComputerChoice) {
 }
 
 // PLAY 
-function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase();
+function playRound(humanChoice) {
+    const computerChoice = getComputerChoice();
+    console.log(`computer choice: ${computerChoice}`);
     const result = checkWinner(humanChoice, computerChoice);
+
+    updateChoiceImages(humanChoice, computerChoice);
+    
     if (result === 'You Win!') {
         humanWins++;
     } else if (result === 'Computer wins!') {
         computerWins++;
+    } else if (result === 'Tie') {
+        ties++;
     }
-    return result;
+    
+    console.log(`Human Wins: ${humanWins}`);
+    console.log(`Computer Wins: ${computerWins}`);
+    console.log(`Ties: ${ties}`);
+
+    updateScoreBoard();
+    checkGameWinner();
 }
 
+// DISPLAY SCOREBOARD TO DOM
+function updateScoreBoard() {
+    document.getElementById('human-score').textContent = humanWins;
+    document.getElementById('computer-score').textContent = computerWins;
+    document.getElementById('ties').textContent = ties;
+}
 
-const computerChoice = getComputerChoice();
-const humanChoice = getHumanChoice();
-console.log(`Computer choice: ${computerChoice}`);
-console.log(`Human choice: ${humanChoice}`);
-const result = playRound(humanChoice, computerChoice);
-console.log(result);
-console.log(`Human Wins: ${humanWins}`);
-console.log(`Computer Wins: ${computerWins}`);
+// DISPLAY WINNER TO DOM
+function checkGameWinner() {
+    if (humanWins >= 5) {
+        document.getElementById('message').textContent = 'You win the game!';
+    } else if (computerWins >= 5) {
+        document.getElementById('message').textContent = 'Computer wins the game!';
+    }
+}
 
+// UPDATE CHOICE IMAGES
+function updateChoiceImages(humanChoice, computerChoice) {
+    const humanChoiceImage = document.getElementById('human-choice-image');
+    const computerChoiceImage = document.getElementById('computer-choice-image');
 
+    humanChoiceImage.src = `./images/${humanChoice}`;
+    computerChoiceImage.src = `./images/${computerChoice}`;
 
+    humanChoiceImage.style.display = 'block';
+    computerChoiceImage.style.display = 'block';
+}
 
